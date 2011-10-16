@@ -1,0 +1,9 @@
+<% statuses = IssueStatus.all.collect{ |v| [v.name, v.id] } %>
+<p>
+  <label><%= l(:child_status_id) %></label>
+  <%= select_tag 'settings[child_status_id]', options_for_select(statuses, @settings[:child_status_id].to_i) %>
+</p>
+<p>
+  <label><%= l(:parent_status_id) %></label>
+  <%= select_tag 'settings[parent_status_id]', options_for_select(statuses, @settings[:parent_status_id].to_i) %>
+</p>

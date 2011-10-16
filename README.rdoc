@@ -1,0 +1,9 @@
+= Redmine Autoclose
+
+Autocloses parent task when all subtasks are closed.
+
+
+== License
+
+This plugin is licensed under the GNU/GPL v3.
+See COPYING and LICENSE for details.

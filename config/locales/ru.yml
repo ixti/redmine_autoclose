@@ -1,0 +1,21 @@
+# This file is a part of redmine_autoclose
+# redMine plugin, that auto-closes parent issue.
+#
+# Copyright (c) 2011 Aleksey V Zapparov AKA ixti
+#
+# redmine_autoclose is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# redmine_autoclose is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with redmine_autoclose.  If not, see <http://www.gnu.org/licenses/>.
+
+ru:
+  child_status_id: Когда все под-задачи станут
+  parent_status_id: Установить статус родителя в
