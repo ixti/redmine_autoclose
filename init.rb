@@ -24,7 +24,7 @@ Redmine::Plugin.register :redmine_autoclose do
   name        'redmine_autoclose'
   author      'Aleksey V Zapparov AKA "ixti"'
   description 'Auto-close parent issue, when childs got closed.'
-  version     '0.0.1'
+  version     '0.0.2'
   url         'https://github.com/ixti/redmine_autoclose/'
   author_url  'http://www.ixti.ru/'
 
@@ -37,4 +37,11 @@ Redmine::Plugin.register :redmine_autoclose do
 end
 
 
-require 'redmine_autoclose/hooks/model_issue_hook'
+require 'dispatcher'
+
+
+Dispatcher.to_prepare :redmine_tags do
+  unless Issue.included_modules.include?(RedmineAutoclose::Patches::IssuePatch)
+    Issue.send(:include, RedmineAutoclose::Patches::IssuePatch)
+  end
+end

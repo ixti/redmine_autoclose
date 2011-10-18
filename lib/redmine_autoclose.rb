@@ -17,28 +17,6 @@
 # along with redmine_autoclose.  If not, see <http://www.gnu.org/licenses/>.
 
 module RedmineAutoclose
-  module Hooks
-    class ModelIssueHook < Redmine::Hook::ViewListener
-      def controller_issues_edit_after_save context={}
-        issue = context[:issue]
-        if issue.parent && child_status_id == issue.status_id && autoclose_parent?(issue)
-          issue.parent.update_attributes :status_id => parent_status_id
-        end
-      end
-
-      protected
-
-      def autoclose_parent? issue
-        # redmine uses awesome_nested_set - chidren contains ONLY direct childs
-        issue.parent.children.all?{ |i| i.status_id == child_status_id }
-      end
-
-      # reduce route to the settings
-      [:parent_status_id, :child_status_id].each do |key|
-        class_eval <<-EOV
-        def #{key}() Setting[:plugin_redmine_autoclose][:#{key}].to_i end
-        EOV
-      end
-    end
-  end
+  def self.child_status_id()  Setting[:plugin_redmine_autoclose][:child_status_id].to_i  end
+  def self.parent_status_id() Setting[:plugin_redmine_autoclose][:parent_status_id].to_i end
 end
