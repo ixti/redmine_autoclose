@@ -24,11 +24,11 @@ Redmine::Plugin.register :redmine_autoclose do
   name        'redmine_autoclose'
   author      'Aleksey V Zapparov AKA "ixti"'
   description 'Auto-close parent issue, when childs got closed.'
-  version     '0.0.2'
+  version     '0.0.3'
   url         'https://github.com/ixti/redmine_autoclose/'
   author_url  'http://www.ixti.ru/'
 
-  requires_redmine :version_or_higher => '1.2.0'
+  requires_redmine :version_or_higher => '2.0.0'
 
   settings :default => {
     :child_status_id => 0,
@@ -36,11 +36,8 @@ Redmine::Plugin.register :redmine_autoclose do
   }, :partial => 'autoclose/settings'
 end
 
-
-require 'dispatcher'
-
-
-Dispatcher.to_prepare :redmine_tags do
+ActionDispatch::Callbacks.to_prepare do
+  require_dependency 'issue'
   unless Issue.included_modules.include?(RedmineAutoclose::Patches::IssuePatch)
     Issue.send(:include, RedmineAutoclose::Patches::IssuePatch)
   end
